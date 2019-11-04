@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="Auditor_DS" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Year_DS" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_1_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_2_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_3_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_4_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_5_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_6_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_7_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_8_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_9_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_4_chart_old" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Pan_23_chart" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="Auditor_DS" id="Auditor_DS" type="sql">
+      <Name>Auditor_DS</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[select "Name" from (select distinct 1 as srt, "Name" from core."Directions"
+union 
+select 0 as srt, 'По всем аудиторам' as Name
+order by srt) t]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Year_DS" id="Year_DS" type="sql">
+      <Name>Year_DS</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_1_chart" id="Pan_1_chart" type="sql">
+      <Name>Pan_1_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select t."typ",sum("plan") as "Планируется", sum("work") as "В работе" from (
+select
+case c."code" when 'control' then 'КМ' 
+          when 'analytical' then 'ЭАМ' 
+          end as typ,
+c."code",          
+case when c."EventStarted"= 1 then coalesce(count(*),0) end as work,
+case when c."EventStarted"= 0 then coalesce(count(*),0) end as plan
+            FROM "PlannedEvents" c 
+            left join core."Directions" d on d."id" = c."DirectionId" 
+		where c."EmployeeResponsibilityCode" = 1  
+        and c."code" is not null
+        and  cast(c."PlanYear" as varchar) = ${year}
+		and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))	
+group by c."EventStarted", c."code"
+) t
+group by t."typ", t."code"]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_2_chart" id="Pan_2_chart" type="sql">
+      <Name>Pan_2_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select typ, sum(sm) as "Нарушение" from (select typ, round(sum(sm)/1000000, 1) as sm from (select vg."ViolationGroupName" as typ,
+v."ViolatedFundsAmount" as sm
+from "ViolatedFunds" v
+left join core."Directions" d on d."id" = v."DirectionId"
+left join "ViolationGroups" vg on v."ViolationTypeCode" = vg."ViolationTypeCode"
+
+where to_char("ReportAffirmationDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))) t
+group by t.typ
+union
+select typ, round(sum(sm)/1000000, 1) as sm from (select vg."ViolationGroupName"as typ,
+v."ViolatedFundsAmount" as sm
+from core."SecretViolations" v
+join core."ViolationClassifications" c on v."ViolationClassificationId" = c."Id"
+left join core."Directions" d on d."Id" = v."Id"
+left join "ViolationGroups" vg on c."Code" = vg."ViolationTypeCode"
+
+where to_char("Date",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))) t
+group by t.typ) t
+group by t.typ
+order by 2]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_3_chart" id="Pan_3_chart" type="sql">
+      <Name>Pan_3_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select typ, sum(cnt) as "Мероприятия" from (
+SELECT 'КМ' as typ, "planyear", "employeeresponsibilitycode", "directionid", count(distinct planitemid) as cnt
+  FROM "CompletedControlEvents"
+  group by "planyear","employeeresponsibilitycode", "directionid"
+union
+SELECT 'ЭАМ' as typ, "planyear", "employeeresponsibilitycode", "directionid", count(distinct planitemid) as cnt
+  FROM "CompletedExpertEvents"
+  group by "planyear","employeeresponsibilitycode","directionid"
+  ) t
+  left join core."Directions" d on d."id" = t."directionid" 
+where "employeeresponsibilitycode" = 1
+and cast("planyear" as varchar) = ${year}
+and coalesce(d."Name",'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+group by typ]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_4_chart" id="Pan_4_chart" type="sql">
+      <Name>Pan_4_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[with 
+km(cnt) as (select count(*) as cnt from (select distinct eventname, organizationname,  directionid 
+FROM "ControlEventObjects" c 
+left join core."Directions" d on d."id" = c."directionid"
+where cast("planyear" as varchar) = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t )    
+,
+eam (cnt) as (select count (*) as cnt from (select distinct eventname, organizationname,  directionid 
+FROM "ExpertEventObjects" e 
+left join core."Directions" d on d."id" = e."directionid"
+where cast("planyear" as varchar) = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t)   
+,
+oth (cnt) as (select sum(cnt) as cnt from (select count (*) as cnt from (select distinct eventname, organizationname,  directionid 
+FROM "ControlEventObjects" c 
+where cast("planyear" as varchar) = ${year}) c
+union 
+select count (*) as cnt from (select distinct eventname, organizationname,  directionid 
+FROM "ExpertEventObjects" c 
+where cast("planyear" as varchar) = ${year}) e
+) t )    
+
+select typ, cnt as "Объекты" from (
+select 1 as srr, 'КМ' as typ, km.cnt as cnt from km
+union  
+select 2 as srt, 'ЭАМ' as typ, eam.cnt as cnt from eam
+union 
+select 3 as srt, 'Другие аудиторы' as typ, oth.cnt - km.cnt - eam.cnt from oth, km, eam
+union
+select 4 as srt, 'Не охвачено' as typ, 8951 - oth.cnt as cnt from oth,km,eam
+) t]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_5_chart" id="Pan_5_chart" type="sql">
+      <Name>Pan_5_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'Предписаний' as typ, count(*) as "Направлено"
+   from "InjunctionCount" c
+   left join core."Directions" d on d."id" = c."DirectionId" 
+  where TO_CHAR("DocumentDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_6_chart" id="Pan_6_chart" type="sql">
+      <Name>Pan_6_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'Представлений' as typ, count(*) as "Направлено"
+   from "SubmissionCount" c
+   left join core."Directions" d on d."id" = c."DirectionId" 
+  where TO_CHAR("DocumentDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_7_chart" id="Pan_7_chart" type="sql">
+      <Name>Pan_7_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'Всего' nm, count(*) as "Проведено"
+  from "IncomingDocuments" c
+  left join core."Directions" d on d."external_id" = c."DirectionId" 
+ where to_char("CompletionDate",'YYYY') = ${year}
+ and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+union all
+select 'С замечаниями' nm, count(*) as "Проведено"
+  from "DocumentsWithAdmonitions" c
+  left join core."Directions" d on d."external_id" = c."DirectionId" 
+ where to_char("CompletionDate",'YYYY') = ${year}
+ and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+union all
+select 'Учтено' nm, count(*) as "Проведено"
+  from "DocumentsWithAccountedAdmonitions" c
+  left join core."Directions" d on d."external_id" = c."DirectionId" 
+ where to_char("CompletionDate",'YYYY') = ${year} 
+ and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+   order by "Проведено" asc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_8_chart" id="Pan_8_chart" type="sql">
+      <Name>Pan_8_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[with sm (cnt) as (
+  select coalesce(sum("ViolationCoun"),0) cnt
+  from core."SecretViolations" c
+  left join core."Directions" d on d."Id" = c."Id" 
+  where to_char("Date",'YYYY') = ${year}
+  and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам')))
+  , cn (cnt) as (
+  select coalesce(count(*),0) cnt 
+  from "Violations" c
+  left join core."Directions" d on d."id" = c."DirectionId" 
+  where to_char("ReportAffirmationDate",'YYYY') = ${year}
+  and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам')))
+
+  select 'Нарушений' typ, coalesce(sm.cnt+cn.cnt,0) as "Выявлено" from sm, cn]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_9_chart" id="Pan_9_chart" type="sql">
+      <Name>Pan_9_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'Писем' typ, count(*) as "Направлено"
+  from "InformationLetterCount" c
+  left join core."Directions" d on d."id" = c."DirectionId" 
+ where to_char("DocumentDate",'YYYY') = ${year}
+   and "Organization" in ('ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ', 'ПРЕЗИДЕНТ РОССИЙСКОЙ ФЕДЕРАЦИИ')
+   and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_4_chart_old" id="Pan_4_chart_old" type="sql">
+      <Name>Pan_4_chart_old</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'SUM' as typ, count(*) as cnt from "BudgetaryMeasureNotices" b
+where b."DocumentNumber" like 'УВ%'
+and to_char("DocumentDate",'YYYY') = ${year}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Pan_23_chart" id="Pan_23_chart" type="sql">
+      <Name>Pan_23_chart</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select typ, round(sum("Бухучет")/1000000, 1) "Бухучет", round(sum("Вне классификации")/1000000, 1) "Вне классификации", round(sum("Неэффективные расходы")/1000000, 1) "Неэффективные расходы", 
+round(sum("Госзакупки")/1000000, 1) "Госзакупки", round(sum("Нецелевые")/1000000, 1) "Нецелевые", round(sum("Бюджетные")/1000000, 1) "Бюджетные", round(sum("Другие")/1000000, 1) "Другие"  from (
+select 1 as typ, sum("Бухучет") as "Бухучет",  sum("Вне классификации") as "Вне классификации",  sum("Неэффективные расходы") as "Неэффективные расходы",  
+sum("Госзакупки") as "Госзакупки", sum("Нецелевые") as "Нецелевые",  sum("Бюджетные") as "Бюджетные", 
+sum("Другие") - sum("Бухучет") - sum("Вне классификации") - sum("Неэффективные расходы") - sum("Госзакупки")
+- sum("Нецелевые") - sum("Бюджетные") as "Другие" from 
+(select v."ViolationTypeCode",
+case when v."ViolationTypeCode" like '2%' then sum(v."ViolatedFundsAmount") end as "Бухучет",
+case when v."ViolationTypeCode" like '998%' then sum(v."ViolatedFundsAmount") end as "Вне классификации",
+case when v."ViolationTypeCode" like '999%' then sum(v."ViolatedFundsAmount") end "Неэффективные расходы",
+case when v."ViolationTypeCode" like '4%' then sum(v."ViolatedFundsAmount") end "Госзакупки",
+case when v."ViolationTypeCode"||' '||v."ViolationTypeName" in ('1.2.18 Использование бюджетных ассигнований дорожных фондов на цели, не соответствующие целям их предоставления',
+                         '1.2.29 Использование бюджетных ассигнований резервного фонда Правительства Российской Федерации на финансовое обеспечение мероприятий по предупреждению и ликвидации чрезвычайных ситуаций и последствий стихийных бедствий на цели, не соответствующие целям их предоставления ',
+        				 '1.2.46 Расходование казенным учреждением бюджетных средств на цели, не соответствующие утвержденной бюджетной смете',
+						 '1.2.48 Расходование бюджетными и автономными учреждениями средств субсидии на финансовое обеспечение выполнения государственного (муниципального) задания на цели, не связанные с выполнением государственного (муниципального) задания ',
+						 '1.2.50 Расходование бюджетными и автономными учреждениями средств субсидии на иные цели не в соответствии с целями ее предоставления ',
+						 '1.2.53 Расходование юридическими лицами (за исключением государственных (муниципальных) учреждений), индивидуальными предпринимателями, физическими лицами средств грантов в форме субсидий, предоставляемых  в соответствии с решениями Президента Российской Федерации, Правительства Российской Федерации, высшего должностного лица субъекта Российской Федерации, высшего исполнительного органа государственной власти субъекта Российской Федерации, местной администрации, не в соответствии с целями их предоставления,',
+						 '1.2.55 Расходование иными некоммерческими организациями, не являющимися государственными (муниципальными) учреждениями, средств субсидии, в том числе в виде имущественного взноса в государственные корпорации и государственные компании, не в соответствии с целями ее предоставления',
+						 '1.2.62 Расходование средств межбюджетных субсидий не в соответствии с целями их предоставления ',
+						 '1.2.64 Расходование средств субвенций из бюджетов бюджетной системы Российской Федерации не в соответствии с целями их предоставления',
+						 '1.2.74 Оплата за счет средств территориального фонда обязательного медицинского страхования медицинской помощи, не входящей в территориальную программу обязательного медицинского страхования',
+						 '1.3.11 Расходование средств субсидии на софинансирование капитальных вложений в объекты государственной собственности субъектов Российской Федерации не в соответствии с целями ее предоставления',
+						 '1.3.6 Расходование государственными (муниципальными) бюджетными и автономными учреждениями,  государственными (муниципальными) унитарными предприятиями средств субсидии на осуществление капитальных вложений в объекты капитального строительства государственной (муниципальной) собственности и приобретение объектов недвижимого имущества, не в соответствии с целями ее предоставления',
+						 '1.3.9 Расходование средств бюджетных инвестиций в форме капитальных вложений в объекты капитального строительства государственной (муниципальной) собственности или в приобретение объектов недвижимого имущества в государственную (муниципальную) собственность не в соответствии с целями их предоставления',
+						 '6.1.3 Использование средств, выделенных Российской Федерацией на оказание финансовой помощи иностранному государству на цели, не соответствующие направлениям их использования, определенным в международных договорах о предоставлении финансовой помощи, решениях межправительственных комиссий, планах и инвестиционных программах содействия социально-экономическому развитию  иностранного государства, договорах на выполнение строительно-монтажных и иных видов подрядных работ') 
+then sum(v."ViolatedFundsAmount") end "Нецелевые",
+case when v."ViolationTypeCode" like '1.%' 
+and v."ViolationTypeCode" not like '1.2.18%' 
+and v."ViolationTypeCode" not like '1.2.46%' 
+and v."ViolationTypeCode" not like '1.2.48%' 
+and v."ViolationTypeCode" not like '1.2.50%' 
+and v."ViolationTypeCode" not like '1.2.53%' 
+and v."ViolationTypeCode" not like '1.2.55%' 
+and v."ViolationTypeCode" not like '1.2.62%' 
+and v."ViolationTypeCode" not like '1.2.64%' 
+and v."ViolationTypeCode" not like '1.2.74%' 
+and v."ViolationTypeCode" not like '1.3.11%' 
+and v."ViolationTypeCode" not like '1.3.6%'
+and v."ViolationTypeCode" not like '1.3.9%'
+then sum(v."ViolatedFundsAmount") end "Бюджетные",
+sum(v."ViolatedFundsAmount") as "Другие"
+ 
+from "ViolatedFunds" v
+where to_char("ReportAffirmationDate",'YYYY') = ${year}
+group by v."ViolationTypeCode",v."ViolationTypeName") t
+union 
+
+select 1 as typ, sum("Бухучет") as "Бухучет",  sum("Вне классификации") as "Вне классификации",  sum("Неэффективные расходы") as "Неэффективные расходы",  
+sum("Госзакупки") as "Госзакупки", sum("Нецелевые") as "Нецелевые",  sum("Бюджетные") as "Бюджетные", 
+sum("Другие") - sum("Бухучет") - sum("Вне классификации") - sum("Неэффективные расходы") - sum("Госзакупки")
+- sum("Нецелевые") - sum("Бюджетные") as "Другие" from 
+(select c."Code",
+case when c."Code" like '2%' then sum(v."ViolatedFundsAmount") end as "Бухучет",
+case when c."Code" like '998%' then sum(v."ViolatedFundsAmount") end as "Вне классификации",
+case when c."Code" like '999%' then sum(v."ViolatedFundsAmount") end "Неэффективные расходы",
+case when c."Code" like '4%' then sum(v."ViolatedFundsAmount") end "Госзакупки",
+case when c."Code"||' '||c."Name" in ('1.2.18 Использование бюджетных ассигнований дорожных фондов на цели, не соответствующие целям их предоставления',
+                         '1.2.29 Использование бюджетных ассигнований резервного фонда Правительства Российской Федерации на финансовое обеспечение мероприятий по предупреждению и ликвидации чрезвычайных ситуаций и последствий стихийных бедствий на цели, не соответствующие целям их предоставления ',
+    					 '1.2.46 Расходование казенным учреждением бюджетных средств на цели, не соответствующие утвержденной бюджетной смете',
+						 '1.2.48 Расходование бюджетными и автономными учреждениями средств субсидии на финансовое обеспечение выполнения государственного (муниципального) задания на цели, не связанные с выполнением государственного (муниципального) задания ',
+						 '1.2.50 Расходование бюджетными и автономными учреждениями средств субсидии на иные цели не в соответствии с целями ее предоставления ',
+						 '1.2.53 Расходование юридическими лицами (за исключением государственных (муниципальных) учреждений), индивидуальными предпринимателями, физическими лицами средств грантов в форме субсидий, предоставляемых  в соответствии с решениями Президента Российской Федерации, Правительства Российской Федерации, высшего должностного лица субъекта Российской Федерации, высшего исполнительного органа государственной власти субъекта Российской Федерации, местной администрации, не в соответствии с целями их предоставления,',
+						 '1.2.55 Расходование иными некоммерческими организациями, не являющимися государственными (муниципальными) учреждениями, средств субсидии, в том числе в виде имущественного взноса в государственные корпорации и государственные компании, не в соответствии с целями ее предоставления',
+						 '1.2.62 Расходование средств межбюджетных субсидий не в соответствии с целями их предоставления ',
+						 '1.2.64 Расходование средств субвенций из бюджетов бюджетной системы Российской Федерации не в соответствии с целями их предоставления',
+						 '1.2.74 Оплата за счет средств территориального фонда обязательного медицинского страхования медицинской помощи, не входящей в территориальную программу обязательного медицинского страхования',
+						 '1.3.11 Расходование средств субсидии на софинансирование капитальных вложений в объекты государственной собственности субъектов Российской Федерации не в соответствии с целями ее предоставления',
+						 '1.3.6 Расходование государственными (муниципальными) бюджетными и автономными учреждениями,  государственными (муниципальными) унитарными предприятиями средств субсидии на осуществление капитальных вложений в объекты капитального строительства государственной (муниципальной) собственности и приобретение объектов недвижимого имущества, не в соответствии с целями ее предоставления',
+						 '1.3.9 Расходование средств бюджетных инвестиций в форме капитальных вложений в объекты капитального строительства государственной (муниципальной) собственности или в приобретение объектов недвижимого имущества в государственную (муниципальную) собственность не в соответствии с целями их предоставления',
+						 '6.1.3 Использование средств, выделенных Российской Федерацией на оказание финансовой помощи иностранному государству на цели, не соответствующие направлениям их использования, определенным в международных договорах о предоставлении финансовой помощи, решениях межправительственных комиссий, планах и инвестиционных программах содействия социально-экономическому развитию  иностранного государства, договорах на выполнение строительно-монтажных и иных видов подрядных работ') 
+then sum(v."ViolatedFundsAmount") end "Нецелевые",
+case when c."Code" like '1.%' 
+and c."Code" not like '1.2.18%' 
+and c."Code" not like '1.2.46%' 
+and c."Code" not like '1.2.48%' 
+and c."Code" not like '1.2.50%' 
+and c."Code" not like '1.2.53%' 
+and c."Code" not like '1.2.55%' 
+and c."Code" not like '1.2.62%' 
+and c."Code" not like '1.2.64%' 
+and c."Code" not like '1.2.74%' 
+and c."Code" not like '1.3.11%' 
+and c."Code" not like '1.3.6%'
+and c."Code" not like '1.3.9%'
+then sum(v."ViolatedFundsAmount") end "Бюджетные",
+sum(v."ViolatedFundsAmount") as "Другие"
+
+from "SecretViolations" v
+join "ViolationClassifications" c on v."ViolationClassificationId" = c."Id"
+where to_char(v."Date",'YYYY') = ${year}
+group by c."Code",c."Name") t) t
+group by typ]]></Query>
+   </DataAccess>
+</CDADescriptor>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="table" id="table" type="sql">
+      <Name>table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Output indexes="1,2" mode="include"/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_org" name="org" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 
+case when typ is null then 1 else 0 end as srt, coalesce(typ,'Всего') as typ, round(sum(sm)/1000, 2) as sm from (select 
+v."OrganizationName" as OrganizationName,
+vg."ViolationGroupName"as typ,
+v."ViolatedFundsAmount" as sm
+from "ViolatedFunds" v
+left join core."Directions" d on d."id" = v."DirectionId"
+left join "ViolationGroups" vg on v."ViolationTypeCode" = vg."ViolationTypeCode"
+where to_char("ReportAffirmationDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+and v."OrganizationName" = ${org}) t
+group by rollup (t.typ)
+having round(sum(sm)/1000, 2) > 0
+order by srt asc, sm desc]]></Query>
+   </DataAccess>
+</CDADescriptor>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="table" id="table" type="sql">
+      <Name>table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_dir" name="dir" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select d."Name", l."DirectionName", 
+to_char(l."DocumentDate",'dd.MM.yyyy'),
+l."DocumentNumber" as doc_number
+  from core."Directions" d
+inner join "InjunctionCount" l on d.id = l."DirectionId"
+ where to_char("DocumentDate",'YYYY') = ${year}
+and coalesce(d."Name", 'Всего') = coalesce(case when ${dir} = 'Всего' then null else ${dir} end, coalesce(d."Name",'Всего'))
+order by 3]]></Query>
+   </DataAccess>
+</CDADescriptor>

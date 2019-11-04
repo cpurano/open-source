@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="KM" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="EAM" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Graphic" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Auditor_selector" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="Year_selector" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="KM" id="KM" type="sql">
+      <Name>KM</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'КМ' as typ, count (distinct v.planitemid) as "Проведено" FROM "CompletedControlEvents" v
+left join core."Directions" d on d."id" = v."directionid" 
+where "employeeresponsibilitycode" = 1
+and cast("planyear" as varchar) = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="EAM" id="EAM" type="sql">
+      <Name>EAM</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 'ЭАМ' as typ, count (distinct v.planitemid) as "Проведено" FROM "CompletedExpertEvents" v
+left join core."Directions" d on d."id" = v."directionid" 
+where "employeeresponsibilitycode" = 1
+and cast("planyear" as varchar) = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Graphic" id="Graphic" type="sql">
+      <Name>Graphic</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select d."Name", sum(coalesce(e.cnt_eam,0)) as "ЭАМ", sum(coalesce(c.cnt_km,0)) as "КМ"  from core."Directions" d
+left join (select count (distinct c.planitemid) as cnt_km, c."directionid"
+            FROM "CompletedControlEvents" c
+			where "employeeresponsibilitycode" = 1 and cast("planyear" as varchar) = ${year}
+			group by c."directionid") c on d."id" = c."directionid"
+			
+left join (select count (distinct e.planitemid) as cnt_eam, e."directionid" 
+			FROM "CompletedExpertEvents" e
+			where "employeeresponsibilitycode" = 1 and cast("planyear" as varchar) = ${year}
+			group by e."directionid") e on d."id" = e."directionid"
+where coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))            
+group by d."Name"			
+having (sum(coalesce(e.cnt_eam,0))>0 or sum(coalesce(c.cnt_km,0))>0)
+order by d."Name"]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Auditor_selector" id="Auditor_selector" type="sql">
+      <Name>Auditor_selector</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[select "Name" from (select distinct 1 as srt, "Name" from core."Directions"
+union 
+select 0 as srt, 'По всем аудиторам' as Name
+order by srt) t]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="Year_selector" id="Year_selector" type="sql">
+      <Name>Year_selector</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+</CDADescriptor>
