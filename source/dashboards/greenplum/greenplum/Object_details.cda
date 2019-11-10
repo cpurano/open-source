@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="area_table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="chart_table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="area_table" id="area_table" type="sql">
+      <Name>area_table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_typ" name="typ" type="String"/>
+         <Parameter default="parameter_dir" name="dir" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 
+a."planitemnumber",
+case trim(to_char(a."eventstartdate",'month'))
+when 'january' then 'Январь'
+when 'february' then 'Январь'
+when 'march' then 'Март'
+when 'april' then 'Апрель'
+when 'may' then 'Май'
+when 'june' then 'Июнь'
+when 'july' then 'Июль'
+when 'august' then 'Август'
+when 'september' then 'Сентябрь'
+when 'october' then 'Октябрь'
+when 'november' then 'Ноябрь'
+when 'december' then 'Декабрь'
+end ||'.'||trim(to_char("eventstartdate",'YYYY')) as EventStartDate,
+
+case trim(to_char(a."eventenddate",'month'))
+when 'january' then 'Январь'
+when 'february' then 'Январь'
+when 'march' then 'Март'
+when 'april' then 'Апрель'
+when 'may' then 'Май'
+when 'june' then 'Июнь'
+when 'july' then 'Июль'
+when 'august' then 'Август'
+when 'september' then 'Сентябрь'
+when 'october' then 'Октябрь'
+when 'november' then 'Ноябрь'
+when 'december' then 'Декабрь'
+end ||'.'||trim(to_char("eventenddate",'YYYY')) as EventEndDate,
+a."eventname",
+a."organizationname",
+d."Name"
+from core."Directions" d
+inner join 
+(
+select c."directionid", c."planitemnumber", c."eventstartdate", c."eventenddate",c."eventname",c."planyear",c."organizationname",
+'КМ' as typ
+from "ControlEventObjects" c
+union
+select e."directionid",e."planitemnumber", e."eventstartdate", e."eventenddate",e."eventname", e."planyear",e."organizationname",
+'ЭАМ' as typ
+from "ExpertEventObjects" e
+) a on d."id" = a."directionid"
+where cast(a."planyear" as varchar) = ${year}
+and a."typ"  = ${typ}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+order by typ,a."eventstartdate"]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="chart_table" id="chart_table" type="sql">
+      <Name>chart_table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_typ" name="typ" type="String"/>
+         <Parameter default="parameter_dir" name="dir" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select 
+a."planitemnumber",
+case trim(to_char(a."eventstartdate",'month'))
+when 'january' then 'Январь'
+when 'february' then 'Январь'
+when 'march' then 'Март'
+when 'april' then 'Апрель'
+when 'may' then 'Май'
+when 'june' then 'Июнь'
+when 'july' then 'Июль'
+when 'august' then 'Август'
+when 'september' then 'Сентябрь'
+when 'october' then 'Октябрь'
+when 'november' then 'Ноябрь'
+when 'december' then 'Декабрь'
+end ||'.'||trim(to_char("eventstartdate",'YYYY')) as EventStartDate,
+
+case trim(to_char(a."eventenddate",'month'))
+when 'january' then 'Январь'
+when 'february' then 'Январь'
+when 'march' then 'Март'
+when 'april' then 'Апрель'
+when 'may' then 'Май'
+when 'june' then 'Июнь'
+when 'july' then 'Июль'
+when 'august' then 'Август'
+when 'september' then 'Сентябрь'
+when 'october' then 'Октябрь'
+when 'november' then 'Ноябрь'
+when 'december' then 'Декабрь'
+end ||'.'||trim(to_char("eventenddate",'YYYY')) as EventEndDate,
+a."eventname",
+a."organizationname",
+d."Name"
+from core."Directions" d
+inner join 
+(
+select c."directionid", c."planitemnumber", c."eventstartdate", c."eventenddate",c."eventname",c."planyear",c."organizationname",
+'КМ' as typ
+from "ControlEventObjects" c
+union
+select e."directionid",e."planitemnumber", e."eventstartdate", e."eventenddate",e."eventname", e."planyear",e."organizationname",
+'ЭАМ' as typ
+from "ExpertEventObjects" e
+) a on d."id" = a."directionid"
+where cast(a."planyear" as varchar) = ${year}
+and d."Name" = ${dir}
+and a."typ"  = ${typ}
+order by typ,a."eventstartdate"]]></Query>
+   </DataAccess>
+</CDADescriptor>

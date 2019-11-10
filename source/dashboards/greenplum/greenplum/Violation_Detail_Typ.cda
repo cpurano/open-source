@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="top10_table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="all_table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="top10_table" id="top10_table" type="sql">
+      <Name>top10_table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_org" name="org" type="String"/>
+      </Parameters>
+      <Query><![CDATA[SELECT "ViolationTypeCode"||' '||"ViolationTypeName", count(distinct "ViolationId") as CNT
+  FROM "Violations" 
+  where to_char("ReportAffirmationDate",'YYYY') = ${year}
+  and "OrganizationShortName" = ${org}
+  group by "ViolationTypeCode"||' '||"ViolationTypeName", "OrganizationShortName"
+  order by 2 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="all_table" id="all_table" type="sql">
+      <Name>all_table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_vio" name="vio" type="String"/>
+      </Parameters>
+      <Query><![CDATA[SELECT "OrganizationName", count(distinct "ViolationId") CNT
+  FROM "Violations" 
+  where to_char("ReportAffirmationDate",'YYYY') = ${year}
+  and "ViolationTypeCode"||' '||"ViolationTypeName" = ${vio}
+  group by "ViolationTypeCode"||' '||"ViolationTypeName", "OrganizationName"
+  order by 2 desc]]></Query>
+   </DataAccess>
+</CDADescriptor>

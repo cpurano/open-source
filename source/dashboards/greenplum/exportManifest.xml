@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:ExportManifest xmlns:ns2="http://www.pentaho.com/schema/">
+    <ExportManifestInformation exportDate="10-09-2019 03:55:50 UTC" exportBy="padmin" rootFolder="/home/" manifestVersion="2"/>
+    <ExportManifestEntity path="greenplum">
+        <ExportManifestProperty>
+            <EntityMetaData name="greenplum" createdDate="2019-05-16T13:39:52.970Z" isFolder="true" path="greenplum" isHidden="false" isSchedulable="true" locale="ru_RU" title="greenplum"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/CheckViolate.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="CheckViolate.cda" createdDate="2019-05-16T13:39:52.986Z" isFolder="false" path="greenplum/CheckViolate.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="CheckViolate"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/CheckViolate.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="CheckViolate.cdfde" createdDate="2019-05-16T13:39:53.064Z" isFolder="false" path="greenplum/CheckViolate.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="CheckViolate.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/CheckViolate.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="CheckViolate.wcdf" createdDate="2019-05-16T13:39:53.090Z" isFolder="false" path="greenplum/CheckViolate.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="CheckViolate.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Completed_Events_Detail.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Completed_Events_Detail.cda" createdDate="2019-05-16T13:39:53.119Z" isFolder="false" path="greenplum/Completed_Events_Detail.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Completed_Events_Detail"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Completed_Events_Detail.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Completed_Events_Detail.cdfde" createdDate="2019-05-16T13:39:53.153Z" isFolder="false" path="greenplum/Completed_Events_Detail.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Completed_Events_Detail.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Completed_Events_Detail.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Completed_Events_Detail.wcdf" createdDate="2019-05-16T13:39:53.993Z" isFolder="false" path="greenplum/Completed_Events_Detail.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Completed_Events_Detail.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Expert_drill.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Expert_drill.cda" createdDate="2019-05-16T13:39:53.177Z" isFolder="false" path="greenplum/Expert_drill.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Expert_drill"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Expert_drill.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Expert_drill.cdfde" createdDate="2019-05-16T13:39:53.200Z" isFolder="false" path="greenplum/Expert_drill.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Expert_drill.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Expert_drill.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Expert_drill.wcdf" createdDate="2019-05-16T13:39:53.225Z" isFolder="false" path="greenplum/Expert_drill.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Expert_drill.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Injunction_Detail.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Injunction_Detail.cda" createdDate="2019-05-16T13:39:53.253Z" isFolder="false" path="greenplum/Injunction_Detail.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Injunction_Detail"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Injunction_Detail.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Injunction_Detail.cdfde" createdDate="2019-05-16T13:39:53.276Z" isFolder="false" path="greenplum/Injunction_Detail.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Injunction_Detail.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Injunction_Detail.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Injunction_Detail.wcdf" createdDate="2019-05-16T13:39:53.944Z" isFolder="false" path="greenplum/Injunction_Detail.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Injunction_Detail.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Main_panel.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Main_panel.cda" createdDate="2019-05-16T13:39:53.300Z" isFolder="false" path="greenplum/Main_panel.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Main_panel"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Main_panel.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Main_panel.cdfde" createdDate="2019-05-16T13:39:53.325Z" isFolder="false" path="greenplum/Main_panel.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Main_panel.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Main_panel.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Main_panel.wcdf" createdDate="2019-05-16T13:39:53.354Z" isFolder="false" path="greenplum/Main_panel.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Main_panel.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Object_details.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Object_details.cda" createdDate="2019-06-04T12:16:47.650Z" isFolder="false" path="greenplum/Object_details.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Object_details.cda"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Object_details.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Object_details.cdfde" createdDate="2019-06-04T12:16:47.600Z" isFolder="false" path="greenplum/Object_details.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Object_details.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Object_details.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Object_details.wcdf" createdDate="2019-06-04T12:16:47.554Z" isFolder="false" path="greenplum/Object_details.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" description="ViolationSum" title="Детализация объектов"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Plan_KM_EAM.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Plan_KM_EAM.cda" createdDate="2019-05-16T13:39:53.382Z" isFolder="false" path="greenplum/Plan_KM_EAM.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Plan_KM_EAM"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Plan_KM_EAM.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Plan_KM_EAM.cdfde" createdDate="2019-05-16T13:39:53.407Z" isFolder="false" path="greenplum/Plan_KM_EAM.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Plan_KM_EAM.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Plan_KM_EAM.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Plan_KM_EAM.wcdf" createdDate="2019-05-16T13:39:54.016Z" isFolder="false" path="greenplum/Plan_KM_EAM.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Plan_KM_EAM.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Submission_Detail.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Submission_Detail.cda" createdDate="2019-05-16T13:39:53.432Z" isFolder="false" path="greenplum/Submission_Detail.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Submission_Detail"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Submission_Detail.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Submission_Detail.cdfde" createdDate="2019-05-16T13:39:53.457Z" isFolder="false" path="greenplum/Submission_Detail.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Submission_Detail.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Submission_Detail.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Submission_Detail.wcdf" createdDate="2019-05-16T13:39:53.969Z" isFolder="false" path="greenplum/Submission_Detail.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Submission_Detail.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/ViolationSum.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="ViolationSum.cda" createdDate="2019-05-16T13:39:53.482Z" isFolder="false" path="greenplum/ViolationSum.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="ViolationSum"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/ViolationSum.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="ViolationSum.cdfde" createdDate="2019-05-16T13:39:53.507Z" isFolder="false" path="greenplum/ViolationSum.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="ViolationSum.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/ViolationSum.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="ViolationSum.wcdf" createdDate="2019-05-16T13:39:53.531Z" isFolder="false" path="greenplum/ViolationSum.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="ViolationSum.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Group.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Group.cda" createdDate="2019-05-16T13:39:53.555Z" isFolder="false" path="greenplum/Violation_Detail_Group.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Group"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Group.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Group.cdfde" createdDate="2019-05-16T13:39:53.577Z" isFolder="false" path="greenplum/Violation_Detail_Group.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Group.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Group.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Group.wcdf" createdDate="2019-05-16T13:39:53.800Z" isFolder="false" path="greenplum/Violation_Detail_Group.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Group.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Org.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Org.cda" createdDate="2019-05-16T13:39:53.600Z" isFolder="false" path="greenplum/Violation_Detail_Org.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Org"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Org.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Org.cdfde" createdDate="2019-05-16T13:39:53.623Z" isFolder="false" path="greenplum/Violation_Detail_Org.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Org.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Org.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Org.wcdf" createdDate="2019-05-16T13:39:53.823Z" isFolder="false" path="greenplum/Violation_Detail_Org.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Org.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Typ.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Typ.cda" createdDate="2019-05-16T13:39:53.647Z" isFolder="false" path="greenplum/Violation_Detail_Typ.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Typ"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Typ.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Typ.cdfde" createdDate="2019-05-16T13:39:53.669Z" isFolder="false" path="greenplum/Violation_Detail_Typ.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Typ.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Violation_Detail_Typ.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Violation_Detail_Typ.wcdf" createdDate="2019-05-16T13:39:53.846Z" isFolder="false" path="greenplum/Violation_Detail_Typ.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Violation_Detail_Typ.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/sp.jpg">
+        <ExportManifestProperty>
+            <EntityMetaData name="sp.jpg" createdDate="2019-05-16T13:39:53.693Z" isFolder="false" path="greenplum/sp.jpg" isHidden="true" isSchedulable="true" locale="ru_RU" title="sp.jpg"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация мероприятий.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация мероприятий.cda" createdDate="2019-05-16T13:39:53.729Z" isFolder="false" path="greenplum/Детализация мероприятий.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация мероприятий"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация мероприятий.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация мероприятий.cdfde" createdDate="2019-05-16T13:39:53.752Z" isFolder="false" path="greenplum/Детализация мероприятий.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация мероприятий.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация мероприятий.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация мероприятий.wcdf" createdDate="2019-05-16T13:39:53.776Z" isFolder="false" path="greenplum/Детализация мероприятий.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация мероприятий.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация писем.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация писем.cda" createdDate="2019-05-16T13:39:53.872Z" isFolder="false" path="greenplum/Детализация писем.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация писем"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация писем.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация писем.cdfde" createdDate="2019-05-16T13:39:53.896Z" isFolder="false" path="greenplum/Детализация писем.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация писем.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Детализация писем.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Детализация писем.wcdf" createdDate="2019-05-16T13:39:53.919Z" isFolder="false" path="greenplum/Детализация писем.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Детализация писем.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено предписаний.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено предписаний.cda" createdDate="2019-05-16T13:39:54.040Z" isFolder="false" path="greenplum/Направлено предписаний.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено предписаний"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено предписаний.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено предписаний.cdfde" createdDate="2019-05-16T13:39:54.064Z" isFolder="false" path="greenplum/Направлено предписаний.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено предписаний.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено предписаний.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено предписаний.wcdf" createdDate="2019-05-16T13:39:54.088Z" isFolder="false" path="greenplum/Направлено предписаний.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено предписаний.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено представлений.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено представлений.cda" createdDate="2019-05-16T13:39:54.112Z" isFolder="false" path="greenplum/Направлено представлений.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено представлений"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено представлений.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено представлений.cdfde" createdDate="2019-05-16T13:39:54.137Z" isFolder="false" path="greenplum/Направлено представлений.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено представлений.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено представлений.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено представлений.wcdf" createdDate="2019-05-16T13:39:54.163Z" isFolder="false" path="greenplum/Направлено представлений.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено представлений.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено уведомлений СП.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено уведомлений СП.cda" createdDate="2019-05-16T13:39:54.187Z" isFolder="false" path="greenplum/Направлено уведомлений СП.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено уведомлений СП"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено уведомлений СП.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено уведомлений СП.cdfde" createdDate="2019-05-16T13:39:54.211Z" isFolder="false" path="greenplum/Направлено уведомлений СП.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено уведомлений СП.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Направлено уведомлений СП.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Направлено уведомлений СП.wcdf" createdDate="2019-05-16T13:39:54.235Z" isFolder="false" path="greenplum/Направлено уведомлений СП.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Направлено уведомлений СП.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Объектов охвачено.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Объектов охвачено.cda" createdDate="2019-05-16T13:39:54.258Z" isFolder="false" path="greenplum/Объектов охвачено.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Объектов охвачено"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Объектов охвачено.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Объектов охвачено.cdfde" createdDate="2019-05-16T13:39:54.282Z" isFolder="false" path="greenplum/Объектов охвачено.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Объектов охвачено.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Объектов охвачено.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Объектов охвачено.wcdf" createdDate="2019-05-16T13:39:54.307Z" isFolder="false" path="greenplum/Объектов охвачено.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Объектов охвачено.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Писем Правительству и Президенту РФ.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Писем Правительству и Президенту РФ.cda" createdDate="2019-05-16T13:39:54.330Z" isFolder="false" path="greenplum/Писем Правительству и Президенту РФ.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Писем Правительству и Президенту РФ"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Писем Правительству и Президенту РФ.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Писем Правительству и Президенту РФ.cdfde" createdDate="2019-05-16T13:39:54.354Z" isFolder="false" path="greenplum/Писем Правительству и Президенту РФ.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Писем Правительству и Президенту РФ.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Писем Правительству и Президенту РФ.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Писем Правительству и Президенту РФ.wcdf" createdDate="2019-05-16T13:39:54.378Z" isFolder="false" path="greenplum/Писем Правительству и Президенту РФ.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Писем Правительству и Президенту РФ.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Проведено КМ-ЭАМ.cda">
+        <ExportManifestProperty>
+            <EntityMetaData name="Проведено КМ-ЭАМ.cda" createdDate="2019-05-16T13:39:54.402Z" isFolder="false" path="greenplum/Проведено КМ-ЭАМ.cda" isHidden="false" isSchedulable="true" locale="ru_RU" title="Проведено КМ-ЭАМ"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Проведено КМ-ЭАМ.cdfde">
+        <ExportManifestProperty>
+            <EntityMetaData name="Проведено КМ-ЭАМ.cdfde" createdDate="2019-05-16T13:39:54.426Z" isFolder="false" path="greenplum/Проведено КМ-ЭАМ.cdfde" isHidden="false" isSchedulable="true" locale="ru_RU" title="Проведено КМ-ЭАМ.cdfde"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+    <ExportManifestEntity path="greenplum/Проведено КМ-ЭАМ.wcdf">
+        <ExportManifestProperty>
+            <EntityMetaData name="Проведено КМ-ЭАМ.wcdf" createdDate="2019-05-16T13:39:54.451Z" isFolder="false" path="greenplum/Проведено КМ-ЭАМ.wcdf" isHidden="false" isSchedulable="true" locale="ru_RU" title="Проведено КМ-ЭАМ.wcdf"/>
+        </ExportManifestProperty>
+        <ExportManifestProperty>
+            <EntityAcl>
+                <entriesInheriting>true</entriesInheriting>
+                <owner>padmin</owner>
+                <ownerType>USER</ownerType>
+            </EntityAcl>
+        </ExportManifestProperty>
+    </ExportManifestEntity>
+</ns2:ExportManifest>

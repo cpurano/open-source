@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="auditor" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="pie" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="table" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="bar" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="auditor" id="auditor" type="sql">
+      <Name>auditor</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[select "Name" from (select distinct 1 as srt, "Name" from core."Directions"
+union 
+select 0 as srt, 'По всем аудиторам' as Name
+order by srt) t]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="pie" id="pie" type="sql">
+      <Name>pie</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select typ, sum(sm) as "Нарушений" from (select typ, round(sum(sm)/100000, 1) as sm from (select vg."ViolationGroupName" as typ,
+v."ViolatedFundsAmount" as sm
+from "ViolatedFunds" v
+left join core."Directions" d on d."id" = v."DirectionId"
+left join "ViolationGroups" vg on v."ViolationTypeCode" = vg."ViolationTypeCode"
+where to_char("ReportAffirmationDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t
+group by t.typ
+
+union
+
+select typ, round(sum(sm)/100000, 1) as sm from (select
+vg."ViolationGroupName" as typ,
+v."ViolatedFundsAmount" as sm
+from core."SecretViolations" v
+join core."ViolationClassifications" c on v."ViolationClassificationId" = c."Id"
+left join core."Directions" d on d."Id" = v."Id" 
+left join "ViolationGroups" vg on c."Code" = vg."ViolationTypeCode"
+
+where to_char("Date",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t
+group by t.typ) t
+group by t.typ]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="table" id="table" type="sql">
+      <Name>table</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select typ, sm from (select coalesce(t.typ, 'Итого') typ, round(sum(t.sm),1) as sm from (select t.typ, round(sum(t.sm)/1000000, 1) as sm from (select 
+vg."ViolationGroupName" as typ,
+v."ViolatedFundsAmount" as sm
+from "ViolatedFunds" v
+left join core."Directions" d on d."id" = v."DirectionId"
+left join "ViolationGroups" vg on v."ViolationTypeCode" = vg."ViolationTypeCode"
+where to_char("ReportAffirmationDate",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t
+group by t.typ
+
+union
+
+select typ, round(sum(sm)/1000000, 1) as sm from (select
+vg."ViolationGroupName" as typ,
+v."ViolatedFundsAmount" as sm
+from core."SecretViolations" v
+join core."ViolationClassifications" c on v."ViolationClassificationId" = c."Id"
+left join core."Directions" d on d."Id" = v."Id"
+left join "ViolationGroups" vg on c."Code" = vg."ViolationTypeCode"
+
+where to_char("Date",'YYYY') = ${year}
+and coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+) t
+group by t.typ) t
+group by rollup(t.typ)) t
+order by 2]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="bar" id="bar" type="sql">
+      <Name>bar</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_auditor" name="auditor" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select t."OrganizationName", cnt as "Нарушений" from (
+select * from (select v."OrganizationName", to_char("ReportAffirmationDate",'YYYY') rep_year, round(sum(v."ViolatedFundsAmount"*1000)/1000000000, 1) cnt 
+from "ViolatedFunds" v
+left join core."Directions" d on d."id" = v."DirectionId" 
+where coalesce(d."Name", 'По всем аудиторам') = coalesce(case when ${auditor} = 'По всем аудиторам' then null else ${auditor} end, coalesce(d."Name",'По всем аудиторам'))
+group by v."OrganizationName", to_char("ReportAffirmationDate",'YYYY')) t 
+where t.rep_year = ${year}
+order by 3 desc
+limit 10) t
+order by cnt asc]]></Query>
+   </DataAccess>
+</CDADescriptor>

@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+    <servlet>
+        <servlet-name>MongoServlet</servlet-name>
+        <servlet-class>su.jet.mng.MongoServlet</servlet-class>
+            <init-param>
+                <param-name>MongoHost</param-name>
+                <param-value>172.40.2.64</param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoPort</param-name>
+                <param-value>27017</param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoLogin</param-name>
+                <param-value></param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoPwd</param-name>
+                <param-value></param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoDBName</param-name>
+                <param-value>complex</param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoGridFSBucket</param-name>
+                <param-value>doc_set</param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoCollectionName</param-name>
+                <param-value>queries</param-value>
+            </init-param>
+            <init-param>
+                <param-name>MongoDataCollectionName</param-name>
+                <param-value>queries_data</param-value>
+            </init-param>    
+    </servlet>
+  <servlet-mapping>
+    <servlet-name>MongoServlet</servlet-name>
+    <url-pattern>/mongoservlet</url-pattern>
+  </servlet-mapping>
+</web-app>

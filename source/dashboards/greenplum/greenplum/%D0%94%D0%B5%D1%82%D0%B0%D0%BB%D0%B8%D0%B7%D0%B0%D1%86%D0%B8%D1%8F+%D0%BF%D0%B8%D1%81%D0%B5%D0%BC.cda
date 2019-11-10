@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="year" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="chart_drill" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+      <Connection id="table_drill" type="sql.jndi">
+         <Jndi>sp_greenplum</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="year" id="year" type="sql">
+      <Name>year</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters/>
+      <Query><![CDATA[SELECT distinct "planyear" as year FROM "ExpertEventObjects"
+order by 1 desc]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="chart_drill" id="chart_drill" type="sql">
+      <Name>chart_drill</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_dir" name="dir" type="String"/>
+         <Parameter default="parameter_org" name="org" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select d."Name", l."Organization", 
+to_char(l."DocumentDate",'dd.MM.yyyy'),
+l."DocumentNumber"
+  from core."Directions" d
+inner join "InformationLetterCount" l on d.id = l."DirectionId"
+ where to_char("DocumentDate",'YYYY') = ${year}
+and coalesce(d."Name", 'Всего') = coalesce(case when ${dir} = 'Всего' then null else ${dir} end, coalesce(d."Name",'Всего'))
+   and "Organization" in ('ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ', 'ПРЕЗИДЕНТ РОССИЙСКОЙ ФЕДЕРАЦИИ')
+order by 3]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="table_drill" id="table_drill" type="sql">
+      <Name>table_drill</Name>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="parameter_year" name="year" type="String"/>
+         <Parameter default="parameter_dir" name="dir" type="String"/>
+         <Parameter default="parameter_org" name="org" type="String"/>
+      </Parameters>
+      <Query><![CDATA[select d."Name", l."Organization", 
+to_char(l."DocumentDate",'dd.MM.yyyy'),
+l."DocumentNumber"
+  from core."Directions" d
+inner join "InformationLetterCount" l on d.id = l."DirectionId"
+ where to_char("DocumentDate",'YYYY') = ${year}
+and coalesce(d."Name", 'Всего') = coalesce(case when ${dir} = 'Всего' then null else ${dir} end, coalesce(d."Name",'Всего'))
+   and "Organization" in ('ПРАВИТЕЛЬСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ', 'ПРЕЗИДЕНТ РОССИЙСКОЙ ФЕДЕРАЦИИ')
+and coalesce(l."Organization", 'Всего') = coalesce(case when ${org} = 'Всего' then null else ${org} end, coalesce(l."Organization",'Всего'))
+order by 3]]></Query>
+   </DataAccess>
+</CDADescriptor>
